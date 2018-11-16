@@ -16,7 +16,12 @@ function writeOneMillionTimes(writer, data, encoding, callback) {
             }
         } while (i > 0 && ok);
         if (i > 0) {
+            console.log('drain: ' + i);
             writer.once('drain', write);
         }
     }
 }
+
+writeOneMillionTimes(file, 'help', 'utf8', () => {
+    console.log('Done!')
+});
