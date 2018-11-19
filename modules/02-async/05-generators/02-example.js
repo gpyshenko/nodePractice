@@ -9,6 +9,6 @@ const myGenerator = testGenerator(['Yura', 'Vova', 'Lexa']);
 let item = myGenerator.next();
 
 while (!item.done) {
-  console.log(item.value);
   item = myGenerator.next();
+  console.log(item);
 }

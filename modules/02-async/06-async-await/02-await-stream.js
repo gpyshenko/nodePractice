@@ -1,8 +1,7 @@
 const fs = require('fs');
 
 const readStream = (stream) => {
-  let resolve,
-    reject;
+  let resolve, reject;
 
   stream.on('data', data => resolve(data));
   stream.on('error', err => reject(err));
@@ -24,7 +23,7 @@ async function read() {
   let reader = readStream(stream);
   let data = await reader();
   while (data) {
-    // await new Promise((resolve, reject) => setTimeout(resolve, 500));
+    await new Promise((resolve, reject) => setTimeout(resolve, 500));
     console.log(data);
     data = await reader();
   }
