@@ -1,1 +1,0 @@
-console.log(process.env.mode) // node -p "process.env.mode = 'prod'"

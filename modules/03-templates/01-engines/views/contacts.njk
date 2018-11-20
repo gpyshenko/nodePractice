@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+{% extends "./base/base.njk" %}
+{% block body %}
+    <p>Contacts</p>
+
     {% if name and email %}
         <p>{{name}}</p>
         <p>{{email}}</p>
@@ -21,5 +16,4 @@
             <button>Отправить</button>
         </form>
     {% endif %}
-</body>
-</html>
+{% endblock %}
