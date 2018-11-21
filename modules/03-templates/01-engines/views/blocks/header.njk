@@ -1,3 +1,11 @@
 <header class="header">
-    <p>Header!</p>
+    <nav class="nav">
+        <ul class="nav-list">
+            {% for item in ['index','about','contacts','registration','cabinet'] %}
+                <li class="nav-item">
+                    <a href="{{'/' if loop.index === 1 else item}}" class="nav-link">{{item}} page</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
 </header>

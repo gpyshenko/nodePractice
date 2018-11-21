@@ -6,7 +6,7 @@
 <body>
     {% include "../blocks/header.njk" %}
     {% block body %}{% endblock %}
-    {% for item in ['methods'] %}
+    {% for item in ['axios.min','methods','sendmail'] %}
         <script src="/scripts/{{item}}.js"></script>
     {% endfor %}
 </body>

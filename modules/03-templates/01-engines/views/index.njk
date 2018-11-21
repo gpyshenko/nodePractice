@@ -1,14 +1,23 @@
 {% extends "./base/base.njk" %}
 {% block body %}
-    
-    {% for item in [1,'asd',true] %}
-        {{item}}
-    {% endfor %}
-    asd
-    {{data}}
-    {% if id %}
-        <p>{{id}}</p>
+    <h1>Upload file</h1>
+    {% if reason %}
+        <p>{{reason}}</p>
     {% endif %}
-
+    {% if msg %}
+        <div class="msg">{{msg}}</div>
+    {% endif %}
     
+    <form action="/" method="post" enctype="multipart/form-data">
+        <input type="text" placeholder="Описание" name="name">
+        <label for="file"></label>
+        <input type="file" id="file" name="photo">
+        <button type="submit">Загрузить файл</button>
+    </form>
+    {% if pic %}
+        {% for item in pic %}
+            <img src="{{item}}" alt="" class="picture">
+            <p class="picture-text">{{loop.index}}</p>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

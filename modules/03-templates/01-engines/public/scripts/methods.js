@@ -52,3 +52,19 @@ function outsideClick(el, callback) {
         callback();
     });
 }
+
+
+var getUsersBtn = document.querySelector('.getUsers');
+if(getUsersBtn) {
+    getUsersBtn.addEventListener('click', function() {
+        axios.get('/api/users')
+            .then(function (response) {
+                // handle success
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    })
+}

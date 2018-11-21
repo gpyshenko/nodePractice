@@ -1,0 +1,11 @@
+{% extends "./base/base.njk" %}
+{% block body %}
+    <h1>Registration</h1>
+    {% if views %}
+        <div class="msg">Вы обновили страницу {{views}} раз</div>
+    {% endif %}
+    <a href="/cabinet" class="secret-link">Secret page</a>
+    <form action="/registration" method="post">
+        <button type="submit">Залогиниться</button>
+    </form>
+{% endblock %}
