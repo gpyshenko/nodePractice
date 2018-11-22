@@ -11,5 +11,6 @@ router.get('/users', (req, res) => {
 }) 
 
 router.get('/robots', ctrlRobots.getRobots);
-
+router.get('/robots/:name', ctrlRobots.getRobot);
+ 
 module.exports = router; 

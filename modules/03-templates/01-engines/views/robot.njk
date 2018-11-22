@@ -1,0 +1,14 @@
+{% extends "./base/base.njk" %}
+{% block body %}
+    <h1>Robot</h1>
+    <div class="robot">
+        <a href="{{ robot.name }}" class="robot-name">{{ robot.name }}</a>
+        <p class="robot-body">{{ robot.body }}</p>
+        <ul class="robot-weapons">
+            {% for weapon in robot.weapons %}
+                <li>{{weapon}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+{% endblock %}

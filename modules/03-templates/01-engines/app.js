@@ -8,6 +8,11 @@ const session = require('express-session');
 const morgan = require('morgan');
 const favicon = require('serve-favicon'); 
 
+const mongoose = require('mongoose');
+
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/pride');
+
 // view engine setup
 nunjucks.configure('views', {
     autoescape: true,
