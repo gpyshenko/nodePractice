@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const ctrlRobots = require('../controllers/robots');
+
 router.get('/users', (req, res) => {
     res.json({
         name: "Artyom",
@@ -8,4 +10,6 @@ router.get('/users', (req, res) => {
     })
 }) 
 
-module.exports = router;
+router.get('/robots', ctrlRobots.getRobots);
+
+module.exports = router; 

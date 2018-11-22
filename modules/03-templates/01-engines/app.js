@@ -17,7 +17,7 @@ app.set('view engine', 'njk');
 app.use(express.static(path.join(__dirname, 'public')));
 
 const log = fs.createWriteStream('mylog.log', { flags: 'a' });
-app.use(morgan('combined', { stream: log })); // combined (prodaction) short tiny dev
+app.use(morgan('combined', { stream: log }));
 
 // bodyPaser config
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -63,5 +63,5 @@ app.use(function (err, req, res, next) {
 });
 
 app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
+    console.log('App listening on port 3000!');
 });
