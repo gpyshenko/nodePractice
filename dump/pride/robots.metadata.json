@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"pride.robots"},{"v":2,"unique":true,"key":{"name":1},"name":"name_1","ns":"pride.robots","background":true}],"uuid":"66e30383b9ff4c07b4aa3059e208acaa"}

@@ -12,5 +12,11 @@ router.get('/users', (req, res) => {
 
 router.get('/robots', ctrlRobots.getRobots);
 router.get('/robots/:name', ctrlRobots.getRobot);
+router.get('/createRobot', (req,res) => {
+    res.render('create-robot')
+});  
+router.post('/createRobot', ctrlRobots.addRobot);  
+router.post('/robots/:name', ctrlRobots.updateRobot);
+router.post('/removeRobot', ctrlRobots.removeRobot);
  
 module.exports = router; 

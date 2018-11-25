@@ -1,6 +1,9 @@
 {% extends "./base/base.njk" %}
 {% block body %}
     <h1>Robot</h1>
+    {% if err %}
+        <h2>{{err}}</h2>
+    {% endif %}
     <div class="robot">
         <a href="{{ robot.name }}" class="robot-name">{{ robot.name }}</a>
         <p class="robot-body">{{ robot.body }}</p>
@@ -10,5 +13,19 @@
             {% endfor %}
         </ul>
     </div>
-    
+
+    <h2>Обновление</h2>
+    <form action="{{ robot.name }}" method="POST" enctype="application/x-www-form-urlencoded">
+        <p>Body robot</p>
+        <input type="text" name="body">
+        <p>Weapons robot</p>
+        <input type="text" name="weapons">
+        <button type="submit">Обновить робота {{ robot.name }}</button>
+    </form>
+
+    <h2>Удаление</h2>
+    <form action="/api/removeRobot" method="POST" enctype="application/x-www-form-urlencoded">
+        <input type="hidden" name="name" value="{{ robot.name }}" checked>
+        <button type="submit">Удалить робота {{ robot.name }}</button>
+    </form>
 {% endblock %}

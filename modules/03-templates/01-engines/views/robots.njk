@@ -1,6 +1,10 @@
 {% extends "./base/base.njk" %}
 {% block body %}
     <h1>Robots</h1>
+    {% if err %}
+        <h2>{{err}}</h2>
+    {% endif %}
+    <a href="/api/createRobot">Создать робота</a>
     {% for robot in robots %}
         <div class="robot">
         <a href="robots/{{ robot.name }}" class="robot-name">{{ robot.name }}</a>

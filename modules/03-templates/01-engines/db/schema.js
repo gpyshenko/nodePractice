@@ -18,8 +18,7 @@ let robotSchema = new Schema({
         ]
     },
     weapons: {
-        type: Array,
-        required: true
+        type: [String]
     }
 });
 

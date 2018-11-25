@@ -1,7 +1,7 @@
 <header class="header">
     <nav class="nav">
         <ul class="nav-list">
-            {% for item in ['index','about','contacts','registration','cabinet'] %}
+            {% for item in ['index','about','contacts','registration','cabinet','/api/robots'] %}
                 <li class="nav-item">
                     <a href="{{'/' if loop.index === 1 else item}}" class="nav-link">{{item}} page</a>
                 </li>
