@@ -5,13 +5,16 @@ const app = express();
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const FileStore = require('session-file-store')(session);
 const morgan = require('morgan');
-const favicon = require('serve-favicon'); 
+const favicon = require('serve-favicon');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/pride', { 
+mongoose.connect('mongodb://localhost:27017/pride', {
     useNewUrlParser: true,
     useCreateIndex: true,
 });
@@ -29,20 +32,38 @@ app.use(morgan('combined', { stream: log }));
 
 // bodyPaser config
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json()); 
+app.use(bodyParser.json());
 
 // Session
 app.use(session({
-    secret: 'gpyshenko',
-    key: 'key',
-    cookie: {
-        path: '/',
-        httpOnly: true,
-        maxAge: null
-    },
-    saveUninitialized: false,
+    store: new FileStore,
+    secret: 'node practice',
+    saveUninitialized: true,
     resave: false
 }));
+
+const userDB = {
+    id: '1',
+    email: 'gpyshenko@gmail.com',
+    password: '281987gp'
+}
+
+passport.use(new LocalStrategy(
+    {
+        usernameField: 'email'
+    },
+    (email, password, done) => {
+        if (email === userDB.email && password === userDB.password) {
+            // если они совпадают передаем объект user в callback функцию done
+            console.log('Возвращаем пользователя: ' + JSON.stringify(userDB));
+            return done(null, userDB);
+        } else {
+            // если не соответствуют то отдаем false
+            return done(null, false);
+        }
+    }
+)
+)
 
 // Routes
 app.all('/registration', function (req, res, next) {
@@ -55,9 +76,9 @@ app.all('/registration', function (req, res, next) {
 })
 
 app.use('/', require('./routes/routes'));
-app.use('/api/', require('./routes/api')) 
+app.use('/api/', require('./routes/api'))
 
-app.use(function(req,res,next) {
+app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
