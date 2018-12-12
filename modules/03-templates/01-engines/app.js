@@ -37,7 +37,7 @@ app.use(bodyParser.json());
 // Session
 app.use(session({
     store: new FileStore,
-    secret: 'node practice',
+    secret: 'gpyshenko',
     saveUninitialized: true,
     resave: false
 }));
@@ -46,24 +46,39 @@ const userDB = {
     id: '1',
     email: 'gpyshenko@gmail.com',
     password: '281987gp'
-}
+};
 
-passport.use(new LocalStrategy(
-    {
-        usernameField: 'email'
-    },
-    (email, password, done) => {
-        if (email === userDB.email && password === userDB.password) {
-            // если они совпадают передаем объект user в callback функцию done
-            console.log('Возвращаем пользователя: ' + JSON.stringify(userDB));
-            return done(null, userDB);
-        } else {
-            // если не соответствуют то отдаем false
-            return done(null, false);
-        }
+passport.use(new LocalStrategy({
+    usernameField: 'email'
+}, (email, password, done) => {
+    if (email === userDB.email && password === userDB.password) {
+        // если они совпадают передаем объект user в callback функцию done
+        console.log('Возвращаем пользователя: ' + JSON.stringify(userDB));
+        return done(null, userDB);
+    } else {
+        // если не соответствуют то отдаем false
+        return done(null, false);
     }
-)
-)
+}))
+
+passport.serializeUser((user, done) => {
+    console.log('Сериализация: ' + JSON.stringify(user));
+    done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+    // здесь необходимо найти пользователя с данным id но он у нас один и мы просто
+    // сравниваем
+    console.log('Десериализация: ' + id);
+    const user = (userDB.id === id)
+        ? userDB
+        : false;
+
+    done(null, user);
+});
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 app.all('/registration', function (req, res, next) {
@@ -77,6 +92,36 @@ app.all('/registration', function (req, res, next) {
 
 app.use('/', require('./routes/routes'));
 app.use('/api/', require('./routes/api'))
+
+
+
+app.get('/login', (req, res) => {
+    res.send('Это страница авторизации, отправьте сюда POST запрос {email, password}');
+});
+
+app.post('/login', (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return res.send('Укажите правильный email и пароль!');
+        }
+        req.login(user, err => {
+            return res.send('Вы удачно прошли аутентификацию!');
+        });
+    })(req, res, next);
+});
+
+app.get('/secret', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.send('Вы прошли авторизацию и оказались на закрытой странице');
+    } else {
+        res
+            .status(403)
+            .send('Доступ запрещен');
+    }
+});
 
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
@@ -93,4 +138,4 @@ app.use(function (err, req, res, next) {
 
 app.listen(3000, function () {
     console.log('App listening on port 3000!');
-});
+}); 
