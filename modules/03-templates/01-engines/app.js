@@ -86,7 +86,6 @@ app.use(function (req, res, next) {
     next()
 })
 
-
 app.all('/registration', function (req, res, next) {
     console.log(req.session.id);
     req.session.views = req.session.views === void 0
