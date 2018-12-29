@@ -81,6 +81,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
+app.use(function (req, res, next) {
+    console.log(req.headers['accept-encoding'])
+    next()
+})
+
+
 app.all('/registration', function (req, res, next) {
     console.log(req.session.id);
     req.session.views = req.session.views === void 0
@@ -92,8 +98,6 @@ app.all('/registration', function (req, res, next) {
 
 app.use('/', require('./routes/routes'));
 app.use('/api/', require('./routes/api'))
-
-
 
 app.get('/login', (req, res) => {
     res.send('Это страница авторизации, отправьте сюда POST запрос {email, password}');
