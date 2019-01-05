@@ -1,0 +1,20 @@
+{% extends "./base/base.njk" %}
+{% block body %}
+    <h1>Login</h1>
+    <p>{{title}}</p>
+    <a href="/secret" class="secret-link">Secret page</a>
+    
+    {% if isAuthenticated != true %}
+        <form action="/login" method="post">
+            <input type="text" name="email">
+            <input type="password" name="password">
+            <button type="submit">Залогиниться</button>
+        </form>
+    {% else%}
+        <form action="/logout" method="post">
+            <button type="submit">Выйти</button>
+        </form>
+    {% endif %}
+
+
+{% endblock %}

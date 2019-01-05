@@ -5,7 +5,7 @@ const postRegistration = (req, res, next) => {
     req.session.isAdmin = true;
     res.redirect('/cabinet'); 
 }
-
+ 
 module.exports = {
     getRegistration,
     postRegistration

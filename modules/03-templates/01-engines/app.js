@@ -24,6 +24,7 @@ nunjucks.configure('views', {
     autoescape: true,
     express: app
 });
+
 app.set('view engine', 'njk');
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -52,11 +53,9 @@ passport.use(new LocalStrategy({
     usernameField: 'email'
 }, (email, password, done) => {
     if (email === userDB.email && password === userDB.password) {
-        // если они совпадают передаем объект user в callback функцию done
         console.log('Возвращаем пользователя: ' + JSON.stringify(userDB));
         return done(null, userDB);
     } else {
-        // если не соответствуют то отдаем false
         return done(null, false);
     }
 }))
@@ -67,13 +66,8 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-    // здесь необходимо найти пользователя с данным id но он у нас один и мы просто
-    // сравниваем
     console.log('Десериализация: ' + id);
-    const user = (userDB.id === id)
-        ? userDB
-        : false;
-
+    const user = (userDB.id === id) ? userDB : false;
     done(null, user);
 });
 
@@ -88,34 +82,14 @@ app.use(function (req, res, next) {
 
 app.all('/registration', function (req, res, next) {
     console.log(req.session.id);
-    req.session.views = req.session.views === void 0
-        ? 0
-        : req.session.views;
+    req.session.views = req.session.views === void 0 ? 0 : req.session.views;
     req.session.views++;
     next();
 })
 
 app.use('/', require('./routes/routes'));
 app.use('/api/', require('./routes/api'))
-
-app.get('/login', (req, res) => {
-    res.send('Это страница авторизации, отправьте сюда POST запрос {email, password}');
-});
-
-app.post('/login', (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
-        if (err) {
-            return next(err);
-        }
-        if (!user) {
-            return res.send('Укажите правильный email и пароль!');
-        }
-        req.login(user, err => {
-            return res.send('Вы удачно прошли аутентификацию!');
-        });
-    })(req, res, next);
-});
-
+  
 app.get('/secret', (req, res) => {
     if (req.isAuthenticated()) {
         res.send('Вы прошли авторизацию и оказались на закрытой странице');
