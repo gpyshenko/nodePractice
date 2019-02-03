@@ -24,7 +24,7 @@
     </form>
 
     <h2>Удаление</h2>
-    <form action="/api/removeRobot" method="POST" enctype="application/x-www-form-urlencoded">
+    <form action="/api/robots" method="POST" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="name" value="{{ robot.name }}" checked>
         <button type="submit">Удалить робота {{ robot.name }}</button>
     </form>

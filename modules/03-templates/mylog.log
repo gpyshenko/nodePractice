@@ -11,3 +11,4 @@
 ::1 - - [12/Dec/2018:20:01:47 +0000] "GET / HTTP/1.1" 500 2186 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36"
 ::1 - - [12/Dec/2018:20:01:48 +0000] "GET / HTTP/1.1" 500 2186 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36"
 ::1 - - [12/Dec/2018:20:01:58 +0000] "GET / HTTP/1.1" 500 2139 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36"
+::1 - - [27/Jan/2019:08:11:46 +0000] "GET /api/robots HTTP/1.1" 500 2139 "http://localhost:3000/api/robots/asdasd" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"

@@ -5,11 +5,14 @@ const ctrlRobots = require('../controllers/robots');
 
 router.get('/users', (req, res) => {
     res.json({
-        name: "Artyom",
-        age: 23
+        users: [
+            {name: "Artyom",age: 23},
+            {name: "Georgiy",age: 23},
+            {name: "Danis",age: 23}
+        ]
     })
 }) 
-
+ 
 router.get('/robots', ctrlRobots.getRobots);
 router.get('/robots/:name', ctrlRobots.getRobot);
 router.get('/createRobot', (req,res) => {
@@ -17,6 +20,6 @@ router.get('/createRobot', (req,res) => {
 });  
 router.post('/createRobot', ctrlRobots.addRobot);  
 router.post('/robots/:name', ctrlRobots.updateRobot);
-router.post('/removeRobot', ctrlRobots.removeRobot);
- 
+router.post('/robots', ctrlRobots.removeRobot); 
+  
 module.exports = router; 

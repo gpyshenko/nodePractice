@@ -1,9 +1,18 @@
+{% set navLinks = [
+    {url: '/', title: 'index'},
+    {url: '/about', title: 'about'},
+    {url: '/contacts', title: 'contacts'},
+    {url: '/registration', title: 'registration'},
+    {url: '/cabinet', title: 'cabinet'},
+    {url: 'api/robots', title: 'robots'}
+] %}
+
 <header class="header">
     <nav class="nav">
         <ul class="nav-list">
-            {% for item in ['index','about','contacts','registration','cabinet','/api/robots'] %}
+            {% for link in navLinks %}
                 <li class="nav-item">
-                    <a href="{{'/' if loop.index === 1 else item}}" class="nav-link">{{item}} page</a>
+                    <a href="{{ link.url }}" class="nav-link">{{ link.title }} page</a>
                 </li>
             {% endfor %}
         </ul>
